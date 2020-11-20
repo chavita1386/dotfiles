@@ -106,6 +106,14 @@ function nzsh() {
   vim ~/.zshrc
 }
 
+function nterminal() {
+  vim ~/.config/alacritty/alacritty.yml
+}
+
+function ni3() {
+  vim ~/.config/i3/config
+}
+
 function pushConfig() {
 	cp ~/.zshrc ~/Documents/dotfiles/.zshrc &&
   cp -R ~/.config/nvim ~/Documents/dotfiles/.config/ &&
