@@ -108,7 +108,7 @@ function nzsh() {
 
 function pushConfig() {
 	cp ~/.zshrc ~/Documents/dotfiles/.zshrc &&
-  cp -R ~/.config/nvim ~/Documents/dotfiles/.config/nvim/ &&
+  cp -R ~/.config/nvim ~/Documents/dotfiles/.config/ &&
   cp ~/.config/alacritty/alacritty.yml ~/Documents/dotfiles/.config/alacritty/alacritty.yml &&
   cp ~/.vimrc ~/Documents/dotfiles/.vimrc &&
   cp ~/.config/i3/config ~/Documents/dotfiles/.config/i3/config
