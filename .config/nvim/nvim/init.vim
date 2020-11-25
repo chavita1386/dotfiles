@@ -19,7 +19,6 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'preservim/nerdcommenter'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-surround'
-Plug 'mattn/emmet-vim'
 
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'jiangmiao/auto-pairs'
@@ -37,15 +36,6 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " go lang
 Plug 'fatih/vim-go'
-
-" vim tsx
-Plug 'pangloss/vim-javascript'    " JavaScript support
-Plug 'leafgarland/typescript-vim' " TypeScript syntax
-Plug 'maxmellon/vim-jsx-pretty'   " JS and JSX syntax
-Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
-Plug 'jparise/vim-graphql'        " GraphQL syntax
-Plug 'elzr/vim-json'
-Plug 'reedes/vim-lexical'
 
 call plug#end()
 
@@ -72,7 +62,7 @@ set expandtab
 
 " UI {{{
 
-let mapleader=" "
+let mapleader=","
 set encoding=utf-8
 set title
 set ruler
@@ -134,6 +124,7 @@ nnoremap  <silent> <s-tab>  :if &modifiable && !&readonly && &modified <CR> :wri
 nmap <C-_> <Plug>NERDCommenterToggle
 vmap <C-_> <Plug>NERDCommenterToggle<CR>gv
 
+nnoremap <C-b> :NERDTreeToggle<CR>
 
 nnoremap <C-p> :Files<CR>
 
@@ -160,8 +151,6 @@ nmap <Leader>l :Prettier<CR>
 " Select all
 nmap <C-a> ggVG
 
-" nerdtree
-nnoremap <Leader>b :NERDTreeToggle<CR>
 " }}}
 
 " ctrlp {{{
@@ -178,11 +167,6 @@ let g:ctrlp_custom_ignore = {
 " emmet {{{
 
 let g:user_emmet_mode='a'
-let g:user_emmet_settings = {
-\  'javascript' : {
-\      'extends' : 'jsx',
-\  },
-\}
 
 " }}}
 

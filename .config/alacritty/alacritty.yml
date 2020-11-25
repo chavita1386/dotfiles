@@ -85,4 +85,4 @@ live_config_reload: true
 
 key_bindings:
 
-  - { key: N,              mods: Control,            action: SpawnNewInstance }
+  - { key: N,              mods: Alt,            action: SpawnNewInstance }

@@ -99,7 +99,7 @@ zstyle :prompt:pure:git:stash show yes
 ## CUSTOM FUNCTIONS
 # Cd to render
 function ninit() {
-  cd nvim ~/.config/nvim/init.vim
+  nvim ~/.config/nvim/init.vim
 }
 
 function nzsh() {

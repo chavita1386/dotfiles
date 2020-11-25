@@ -77,6 +77,7 @@ set relativenumber
 set modelines=1
 set showcmd
 set cursorline
+set virtualedit=all
 set showmatch
 
 " automatically remove all trailing spaces
