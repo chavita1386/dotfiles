@@ -1,116 +1,94 @@
-set nocompatible
-
 let g:python3_host_prog = '/usr/bin/python'
 let g:ruby_host_prog = '/usr/bin/ruby'
 
-" Plugins {{{
-call plug#begin('~/.local/share/nvim/plugged')
+" plugins --------- {{{
 
-" i3Config
-Plug 'mboughaba/i3config.vim'
+call plug#begin('~/.local/share/nvim/plugged')
 
 " themes
 Plug 'sainnhe/forest-night'
 
 " ide
 Plug 'easymotion/vim-easymotion'
-Plug 'scrooloose/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'preservim/nerdcommenter'
-Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-surround'
-Plug 'mattn/emmet-vim'
-
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'jiangmiao/auto-pairs'
 Plug 'terryma/vim-multiple-cursors'
 
-" prettier
+Plug 'scrooloose/nerdtree'
+Plug 'preservim/nerdcommenter'
+Plug 'christoomey/vim-tmux-navigator'
+
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'mattn/emmet-vim'
+Plug 'jiangmiao/auto-pairs'
+
 Plug 'prettier/vim-prettier', {
 \ 'do': 'yarn install',
 \ 'branch': 'release/0.x'
 \ }
-Plug 'reedes/vim-lexical'
 
-" coc server
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-" go lang
-Plug 'fatih/vim-go'
-
-" vim tsx
-Plug 'pangloss/vim-javascript'    " JavaScript support
-Plug 'leafgarland/typescript-vim' " TypeScript syntax
+" react and typescript
+Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
 Plug 'maxmellon/vim-jsx-pretty'   " JS and JSX syntax
 Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
-Plug 'jparise/vim-graphql'        " GraphQL syntax
-Plug 'elzr/vim-json'
-Plug 'reedes/vim-lexical'
+Plug 'jparise/vim-graphql'
+
+" coc conquer of completion
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+let g:coc_global_extensions = ['coc-tsserver', 'coc-go', 'coc-emmet', 'coc-json']
 
 call plug#end()
 
+
 "}}}
 
-" Colors {{{
-
-syntax enable
-filetype plugin on
-set termguicolors
-let g:forest_night_transparent_background = 1
-colorscheme forest-night
-
-" }}}
-
-" Tabs And Spaces {{{
-
-set shiftwidth=2
-set tabstop=2
-set softtabstop=2
-set expandtab
-
-" }}}
-
-" UI {{{
+" basic settings ------- {{{
 
 let mapleader=" "
 set encoding=utf-8
-set title
-set ruler
+
 set number
 set relativenumber
-set modelines=1
-set showcmd
-set cursorline
-set showmatch
 
 " automatically remove all trailing spaces
 autocmd BufWritePre * %s/\s\+$//e
 
-" }}}
 
-" Section Folding {{{
-set foldenable
-set foldlevelstart=10
-set foldnestmax=10
-set foldmethod=syntax
-nnoremap <space> za
-" }}}
+  " tabs ans spaces {{{
 
-" i3config {{{
+    set shiftwidth=2
+    set tabstop=2
+    set softtabstop=2
+    set expandtab
 
-aug i3config_ft_detection
-  au!
-  au BufNewFile,BufRead ~/.config/i3/config set filetype=i3config
-aug end
+  "}}}
 
-" }}}
+  " folding {{{
+    set foldenable
+    set foldlevelstart=10
+    set foldnestmax=10
+    set foldmethod=syntax
+  "}}}
 
-" Mapping Base {{{
+  " theme, colors... {{{
 
-" Easy access to the start of the line
+  syntax enable
+  filetype plugin on
+  set termguicolors
+  let g:forest_night_transparent_background=1
+  colorscheme forest-night
+
+
+  "}}}
+
+
+"}}}
+
+" mapping {{{
+
 nmap 0 ^
 
-" disable record macros
 map q <Nop>
 
 " j/k will move virtual lines (lines that wrap)
@@ -123,115 +101,113 @@ nnoremap gn :bn<CR>
 
 " escape easy
 imap jj <esc>
+imap jk <esc>
 
 " Allow next buffer with ctrl tab
 nnoremap  <silent>   <tab>  :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bnext<CR>
 nnoremap  <silent> <s-tab>  :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bprevious<CR>
-" }}}
 
-" Mapping Control {{{
+  " leader mapping {{{
 
-nmap <C-_> <Plug>NERDCommenterToggle
-vmap <C-_> <Plug>NERDCommenterToggle<CR>gv
+  nmap <Leader>w :w<CR> " save file
+  nmap <Leader>q :q<CR> " close
+  nmap <Leader>x :bd<CR> " close buffer
+  " easymotion
+  nmap <Leader>s <Plug>(easymotion-s2)
+  nnoremap <Leader>b :NERDTreeToggle<CR>
+
+  " }}}
+
+  " control mapping {{{
+
+  nmap <C-_> <Plug>NERDCommenterToggle
+  vmap <C-_> <Plug>NERDCommenterToggle<CR>gv
 
 
-nnoremap <C-p> :Files<CR>
-
-" resize windows
-nmap <C-left> :3wincmd <<CR>
-nmap <C-right> :3wincmd ><CR>
-nmap <C-up> :3wincmd +<CR>
-nmap <C-down> :3wincmd -<CR>
-
-" }}}
-
-" Mapping Leader {{{
-
-nmap <Leader>w :w<CR> " save file
-nmap <Leader>q :q<CR> " close
-nmap <Leader>x :bd<CR> " close buffer
-
-" easymotion
-nmap <Leader>s <Plug>(easymotion-s2)
-
-" prettier
-nmap <Leader>l :Prettier<CR>
-
-" Select all
-nmap <C-a> ggVG
-
-" nerdtree
-nnoremap <Leader>b :NERDTreeToggle<CR>
-" }}}
-
-" ctrlp {{{
-
-let g:ctrlp_use_caching = 0
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/](\.(git|hg|svn)|node_modules)$',
-  \ 'file': '\v\.(exe|so|dll)$',
-  \ }
+  " }}}
 
 " }}}
 
-" emmet {{{
+" react and typescript {{{
 
-let g:user_emmet_mode='a'
-let g:user_emmet_settings = {
-\  'javascript' : {
-\      'extends' : 'jsx',
-\  },
-\}
+" highlighting for large files
+autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
+autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
 
-" }}}
+if isdirectory('./node_modules') && isdirectory('./node_modules/prettier')
+  let g:coc_global_extensions += ['coc-prettier']
+endif
 
-" nerdtree {{{
-
-let g:NERDTreeIgnore = ['^node_modules$']
-let NERDTreeQuitOnOpen=1
+if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
+  let g:coc_global_extensions += ['coc-eslint']
+endif
 
 " }}}
 
-" autopairs {{{
+" plugins settings {{{
 
-let g:AutoPairsFlyMode = 0
-let g:AutoPairsShortcutBackInsert = '<M-b>'
+" vim-jsx configuration
+let g:jsx_ext_required = 0
+
+  " nerdtree {{{
+
+    let g:NERDTreeIgnore = ['^node_modules$']
+    " sync open file with NERDTree
+    " " Check if NERDTree is open or active
+    function! IsNERDTreeOpen()
+      return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
+    endfunction
+
+    " Call NERDTreeFind iff NERDTree is active, current window contains a modifiable
+    " file, and we're not in vimdiff
+    function! SyncTree()
+      if &modifiable && IsNERDTreeOpen() && strlen(expand('%')) > 0 && !&diff
+        NERDTreeFind
+        wincmd p
+      endif
+    endfunction
+
+    " Highlight currently open buffer in NERDTree
+    autocmd BufEnter * call SyncTree()
+
+  " }}}
+
+  " emmet {{{
+
+  let g:user_emmet_mode='a'    "enable all function in all mode.
+  let g:user_emmet_leader_key=','
+  let g:user_emmet_install_global=0
+  autocmd FileType html,css,jsx,tsx EmmetInstall
+
+  " }}}
+
+  " prettier {{{
+
+  let g:prettier#autoformat = 0
+  let g:prettier#exec_cmd_async = 1
+  let g:prettier#config#parser = 'babylon'
+  let g:prettier#config#tab_width = '2'
+  let g:prettier#config#use_tabs = 'false'
+  autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.html PrettierAsync
+
+  " }}}
+
+  " ctrlp {{{
+
+  let g:ctrlp_use_caching = 0
+  set wildignore+=*/tmp/*,*.so,*.swp,*.zip
+  let g:ctrlp_custom_ignore = {
+    \ 'dir':  '\v[\/](\.(git|hg|svn)|node_modules)$',
+    \ 'file': '\v\.(exe|so|dll)$',
+    \ }
+
+
+  " }}}
+
 
 " }}}
-
-" prettier {{{
-
-let g:prettier#autoformat = 0
-let g:prettier#exec_cmd_async = 1
-let g:prettier#config#parser = 'babylon'
-let g:prettier#config#tab_width = '2'
-let g:prettier#config#use_tabs = 'false'
-autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.html PrettierAsync
-
-" }}}
-
-" nerdcommenter {{{
-
-filetype plugin on
-" Add spaces after comment delimiters by default
-let g:NERDSpaceDelims = 1
-" Use compact syntax for prettified multi-line comments
-let g:NERDCompactSexyComs = 1
-
-" }}}
-
-" tmux {{{
-
-let g:tmux_navigator_no_mappings = 1
-" nnoremap <silent> {Previous-Mapping} :TmuxNavigatePrevious<cr>
-
-" }}}
-
 
 " coc settings {{{
-
-autocmd BufWritePre *.go :silent call CocAction('runCommand', 'editor.action.organizeImport')
 
 " TextEdit might fail if hidden is not set.
 set hidden
@@ -349,11 +325,14 @@ xmap ac <Plug>(coc-classobj-a)
 omap ac <Plug>(coc-classobj-a)
 
 " Remap <C-f> and <C-b> for scroll float windows/popups.
-" Note coc#float#scroll works on neovim >= 0.4.0 or vim >= 8.2.0750
-nnoremap <nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-nnoremap <nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-inoremap <nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scrll(1)\<cr>" : "\<Right>"
-inoremap <nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+if has('nvim-0.4.0') || has('patch-8.2.0750')
+  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+endif
 
 " NeoVim-only mapping for visual mode scroll
 " Useful on signatureHelp after jump placeholder of snippet expansion
@@ -397,7 +376,8 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 " Do default action for previous item.
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
-nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>o
+nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
 " }}}
+
 " vim:foldmethod=marker:foldlevel=0

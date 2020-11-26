@@ -12,11 +12,11 @@ window:
 
 font:
   normal:
-    family: 'Fira Code Retina'
+    family: 'inconsolata'
     # family: 'Liberation Mono'
     style: Regular
 
-  size: 11
+  size: 12
 
   offset:
     x: 1

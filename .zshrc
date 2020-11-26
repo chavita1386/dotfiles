@@ -103,31 +103,31 @@ function ninit() {
 }
 
 function nzsh() {
-  vim ~/.zshrc
+  nvim ~/.zshrc
 }
 
 function nterminal() {
-  vim ~/.config/alacritty/alacritty.yml
+  nvim ~/.config/alacritty/alacritty.yml
 }
 
 function ni3() {
-  vim ~/.config/i3/config
+  nvim ~/.config/i3/config
 }
 
 function pushConfig() {
-	cp ~/.zshrc ~/Documents/dotfiles/.zshrc &&
-  cp -R ~/.config/nvim ~/Documents/dotfiles/.config/ &&
-  cp ~/.config/alacritty/alacritty.yml ~/Documents/dotfiles/.config/alacritty/alacritty.yml &&
-  cp ~/.vimrc ~/Documents/dotfiles/.vimrc &&
-  cp ~/.config/i3/config ~/Documents/dotfiles/.config/i3/config
+  cp ~/.zshrc ~/dotfiles/.zshrc &&
+  cp -R ~/.config/nvim ~/dotfiles/.config/ &&
+  cp ~/.config/alacritty/alacritty.yml ~/dotfiles/.config/alacritty/alacritty.yml &&
+  cp ~/.vimrc ~/dotfiles/.vimrc &&
+  cp ~/.config/i3/config ~/dotfiles/.config/i3/config
 }
 
 function pullConfig() {
-	cp  ~/Documents/dotfiles/.zshrc ~/.zshrc &&
-  cp -R ~/Documents/dotfiles/.config/nvim/ ~/.config/nvim &&
-  cp ~/Documents/dotfiles/.config/alacritty/alacritty.yml ~/.config/alacritty/alacritty.yml &&
-  cp ~/Documents/dotfiles/.vimrc ~/.vimrc &&
-  cp ~/Documents/dotfiles/.config/i3/config ~/.config/i3/config
+	cp  ~/dotfiles/.zshrc ~/.zshrc &&
+  cp -R ~/dotfiles/.config/nvim/ ~/.config/nvim &&
+  cp ~/dotfiles/.config/alacritty/alacritty.yml ~/.config/alacritty/alacritty.yml &&
+  cp ~/dotfiles/.vimrc ~/.vimrc &&
+  cp ~/dotfiles/.config/i3/config ~/.config/i3/config
 }
 
 function cdcode() {

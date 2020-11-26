@@ -1,5 +1,5 @@
 
-local user='%{$fg[magenta]%}%n@%{$fg[magenta]%}%m%{$reset_color%}'
+local user='%{$fg[magenta]%}%m%{$fg[brown]%} 💩$reset_color%}'
 local pwd='%{$fg[blue]%}%1d%{$reset_color%}'
 local return_code='%(?..%{$fg[red]%}%? ↵%{$reset_color%})'
 local git_branch='$(git_prompt_status)%{$reset_color%}$(git_prompt_info)%{$reset_color%}'
@@ -20,5 +20,5 @@ ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[cyan]%} ✭"
 ZSH_THEME_RUBY_PROMPT_PREFIX="%{$fg[green]%}‹"
 ZSH_THEME_RUBY_PROMPT_SUFFIX="›%{$reset_color%}"
 
-PROMPT="${user} ${pwd}$ "
+PROMPT="${user}${pwd}$ "
 RPROMPT="${return_code} ${git_branch} \$(ruby_prompt_info)"
