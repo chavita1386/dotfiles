@@ -1,0 +1,8 @@
+set number
+set clipboard+=unnamed
+set relativenumber
+let mapleader = " "
+
+inoremap jj <Esc>
+map <leader>l :action ReformatCode<CR>
+map <leader>a :action $SelectAll<CR>
