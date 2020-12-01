@@ -110,16 +110,16 @@ function nterminal() {
   nvim ~/.config/alacritty/alacritty.yml
 }
 
-function ni3() {
-  nvim ~/.config/i3/config
-}
+#function ni3() {
+  #nvim ~/.config/i3/config
+#}
 
 function pushConfig() {
   cp ~/.zshrc ~/dotfiles/.zshrc &&
   cp -R ~/.config/nvim ~/dotfiles/.config/ &&
   cp ~/.config/alacritty/alacritty.yml ~/dotfiles/.config/alacritty/alacritty.yml &&
   cp ~/.vimrc ~/dotfiles/.vimrc &&
-  cp ~/.config/i3/config ~/dotfiles/.config/i3/config
+  #cp ~/.config/i3/config ~/dotfiles/.config/i3/config
 }
 
 function pullConfig() {
@@ -127,7 +127,7 @@ function pullConfig() {
   cp -R ~/dotfiles/.config/nvim/ ~/.config/nvim &&
   cp ~/dotfiles/.config/alacritty/alacritty.yml ~/.config/alacritty/alacritty.yml &&
   cp ~/dotfiles/.vimrc ~/.vimrc &&
-  cp ~/dotfiles/.config/i3/config ~/.config/i3/config
+  #cp ~/dotfiles/.config/i3/config ~/.config/i3/config
 }
 
 function cdcode() {
@@ -148,6 +148,10 @@ function cdjs() {
 # cd to typescript folder
 function cdtypescript() {
 	cd ~/code/js/typescript/github.com/chavita1386
+}
+
+function windowClass() {
+  xprop | grep WM_CLASS | awk '{ print $4 }'
 }
 # Create a new directory and enter it
 function mkd() {
