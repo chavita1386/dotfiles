@@ -115,6 +115,8 @@ nnoremap  <silent> <s-tab>  :if &modifiable && !&readonly && &modified <CR> :wri
   " easymotion
   nmap <Leader>s <Plug>(easymotion-s2)
   nnoremap <Leader>b :NERDTreeToggle<CR>
+  " prettier
+  nmap <Leader>l :Prettier<CR>
 
   " }}}
 
