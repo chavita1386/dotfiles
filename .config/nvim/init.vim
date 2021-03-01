@@ -7,6 +7,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 " themes
 Plug 'sainnhe/forest-night'
+Plug 'morhetz/gruvbox'
 
 " ide
 Plug 'easymotion/vim-easymotion'
@@ -33,6 +34,7 @@ Plug 'peitalin/vim-jsx-typescript'
 Plug 'maxmellon/vim-jsx-pretty'   " JS and JSX syntax
 Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 Plug 'jparise/vim-graphql'
+Plug 'neoclide/jsonc.vim'
 
 " coc conquer of completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -49,7 +51,9 @@ let mapleader=" "
 set encoding=utf-8
 
 set number
+set title
 set relativenumber
+set clipboard=unnamed
 
 " automatically remove all trailing spaces
 autocmd BufWritePre * %s/\s\+$//e
@@ -77,7 +81,7 @@ autocmd BufWritePre * %s/\s\+$//e
   filetype plugin on
   set termguicolors
   let g:forest_night_transparent_background=1
-  colorscheme forest-night
+  colorscheme gruvbox
 
 
   "}}}
@@ -125,6 +129,12 @@ nnoremap  <silent> <s-tab>  :if &modifiable && !&readonly && &modified <CR> :wri
   nmap <C-_> <Plug>NERDCommenterToggle
   vmap <C-_> <Plug>NERDCommenterToggle<CR>gv
 
+  "if &filetype == "javascript" || &filetype == "python"
+    "inoremap <c-space><C-c><C-u>
+  "else
+    "inoremap <silent><expr> <c-space> coc#refresh()
+  "endif
+
 
   " }}}
 
@@ -154,23 +164,7 @@ let g:jsx_ext_required = 0
   " nerdtree {{{
 
     let g:NERDTreeIgnore = ['^node_modules$']
-    " sync open file with NERDTree
-    " " Check if NERDTree is open or active
-    function! IsNERDTreeOpen()
-      return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
-    endfunction
-
-    " Call NERDTreeFind iff NERDTree is active, current window contains a modifiable
-    " file, and we're not in vimdiff
-    function! SyncTree()
-      if &modifiable && IsNERDTreeOpen() && strlen(expand('%')) > 0 && !&diff
-        NERDTreeFind
-        wincmd p
-      endif
-    endfunction
-
-    " Highlight currently open buffer in NERDTree
-    autocmd BufEnter * call SyncTree()
+    let g:NERDTreeQuitOnOpen=1
 
   " }}}
 
@@ -211,7 +205,8 @@ let g:jsx_ext_required = 0
 
 " coc settings {{{
 
-" TextEdit might fail if hidden is not set.
+
+"TextEdit might fail if hidden is not set.
 set hidden
 
 " Some servers have issues with backup files, see #649.

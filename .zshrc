@@ -80,6 +80,8 @@ export PATH=$PATH:$M2
 export GOPATH=$HOME/code/go
 export PATH=$GOPATH:$PATH
 export PATH=$HOME/code/go/bin:$PATH
+## Rust
+export PATH=$HOME/.cargo/env:$PATH
 
 ## Pure theme
 #fpath+=$HOME/.zsh/pure
@@ -113,6 +115,10 @@ function nterminal() {
 #function ni3() {
   #nvim ~/.config/i3/config
 #}
+
+function log() {
+  git log --graph --pretty=format:'%C(auto)%h%d (%cr) %cn <%ce> %s'
+}
 
 function pushConfig() {
   cp ~/.zshrc ~/dotfiles/.zshrc &&
@@ -182,3 +188,5 @@ function gcn {
 
 local pwd='%{$fg[blue]%}%c~%{$reset_color%}'
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+set -o vi
+source /usr/share/nvm/init-nvm.sh
